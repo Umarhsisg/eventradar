@@ -70,6 +70,21 @@ export function useAuth() {
     return true;
   }
 
+  async function signInWithGoogle() {
+    setError('');
+    const { error: err } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/`,
+      },
+    });
+    if (err) {
+      setError(err.message);
+      return false;
+    }
+    return true;
+  }
+
   async function logout() {
     await supabase.auth.signOut();
   }
@@ -80,5 +95,5 @@ export function useAuth() {
     ? { id: user.id, email: user.email, name: user.email, role: 'student' }
     : null;
 
-  return { user: mergedUser, loading, error, setError, login, signup, logout };
+  return { user: mergedUser, loading, error, setError, login, signup, logout, signInWithGoogle };
 }

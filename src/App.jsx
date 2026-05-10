@@ -12,7 +12,7 @@ import { useAuth } from './hooks/useAuth';
 
 function App() {
   const { events, filteredEvents, loading: eventsLoading, searchQuery, setSearchQuery, filters, setFilters, addEvent, updateEventStatus } = useEvents();
-  const { user, loading: authLoading, error, setError, login, signup, logout } = useAuth();
+  const { user, loading: authLoading, error, setError, login, signup, logout, signInWithGoogle } = useAuth();
 
   if (authLoading) {
     return (
@@ -54,11 +54,11 @@ function App() {
           />
           <Route
             path="/login"
-            element={<LoginPage login={login} error={error} setError={setError} />}
+            element={<LoginPage login={login} signInWithGoogle={signInWithGoogle} error={error} setError={setError} />}
           />
           <Route
             path="/signup"
-            element={<SignupPage signup={signup} error={error} setError={setError} />}
+            element={<SignupPage signup={signup} signInWithGoogle={signInWithGoogle} error={error} setError={setError} />}
           />
           <Route
             path="/admin"

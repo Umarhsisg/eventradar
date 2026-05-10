@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Zap, Eye, EyeOff, LogIn } from 'lucide-react';
+import GoogleSignInButton, { AuthDivider } from '../components/GoogleSignInButton';
 
 const inputStyle = {
   width: '100%',
@@ -14,7 +15,7 @@ const inputStyle = {
   transition: 'border-color 0.15s',
 };
 
-export default function LoginPage({ login, error, setError }) {
+export default function LoginPage({ login, signInWithGoogle, error, setError }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,6 +51,9 @@ export default function LoginPage({ login, error, setError }) {
               {error}
             </div>
           )}
+
+          <GoogleSignInButton onClick={signInWithGoogle} label="Sign in with Google" />
+          <AuthDivider />
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <div>

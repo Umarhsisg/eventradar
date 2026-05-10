@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Zap, Eye, EyeOff, UserPlus, MailCheck, LogIn } from 'lucide-react';
 import { DISTRICTS } from '../lib/mockData';
+import GoogleSignInButton, { AuthDivider } from '../components/GoogleSignInButton';
 
 const inputStyle = {
   width: '100%',
@@ -15,7 +16,7 @@ const inputStyle = {
   transition: 'border-color 0.15s',
 };
 
-export default function SignupPage({ signup, error, setError }) {
+export default function SignupPage({ signup, signInWithGoogle, error, setError }) {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', college: '', district: '', password: '', confirm: '' });
   const [showPass, setShowPass] = useState(false);
@@ -116,6 +117,9 @@ export default function SignupPage({ signup, error, setError }) {
               {error}
             </div>
           )}
+
+          <GoogleSignInButton onClick={signInWithGoogle} label="Sign up with Google" />
+          <AuthDivider />
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* Name */}
